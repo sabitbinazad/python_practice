@@ -147,7 +147,7 @@ def count():
         # Return a JSON response with a message and a 500 Internal Server Error status code
         return {"message": "data not defined"}, 500
 
-##get by uuid
+##get by uuid [read in crud]
 @app.route("/person/<var_name>")
 def find_by_uuid(var_name):
     # Iterate through the 'data' list to search for a person with a matching ID
@@ -160,7 +160,7 @@ def find_by_uuid(var_name):
     # Return a JSON response with a message and a 404 Not Found status code if no matching person is found
     return {"message": "Person not found"}, 404
 
-#delete by uuid
+#delete by uuid [delete in crud]
 @app.route("/person/<var_name>", methods=['DELETE'])
 def delete_person(var_name):
     for person in data:
@@ -172,3 +172,20 @@ def delete_person(var_name):
     # If no person with the given ID is found, return a JSON response with a message and HTTP status code 404 (Not Found)
     return {"message": "Person not found"}, 404
 
+#post on the server [update in crud]
+@app.route("/person", methods=['POST'])
+def create_person():
+    # Get the JSON data from the incoming request
+    new_person = request.get_json()
+
+    # Check if the JSON data is empty or None
+    if not new_person:
+        # Return a JSON response indicating that the request data is invalid or missing
+        # with a status code of 400 (Bad Request)
+        return {"message": "Invalid input, no data provided"}, 400
+
+    # Proceed with further processing of 'new_person', such as adding it to a database
+    # or validating its contents before saving it
+
+    # Assuming the processing is successful, return a success message with status code 201 (Created)
+    return {"message": "Person created successfully"}, 200
