@@ -1,5 +1,5 @@
 # Import the Flask class from the flask module
-from flask import Flask
+from flask import Flask, make_response
 
 # Create an instance of the Flask class, passing in the name of the current module
 app = Flask(__name__)
@@ -21,3 +21,16 @@ def index2():
         status code: 204
     """
     return ({}, 204)
+
+
+@app.route("/exp")
+def index3():
+    """return 'Hello World' message with a status code of 200
+
+    Returns:
+        string: Hello World
+        status code: 200
+    """
+    resp = make_response("Hey, This is Sabit Bin Azad")
+    resp.status_code = 200
+    return resp
