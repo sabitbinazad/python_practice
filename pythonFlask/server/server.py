@@ -189,3 +189,11 @@ def create_person():
 
     # Assuming the processing is successful, return a success message with status code 201 (Created)
     return {"message": "Person created successfully"}, 200
+
+
+#Error Handler
+@app.errorhandler(404)
+def api_not_found(error):
+    # This function is a custom error handler for 404 Not Found errors
+    # It is triggered whenever a 404 error occurs within the Flask application
+    return {"message": "API not found"}, 404
